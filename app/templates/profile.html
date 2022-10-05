@@ -1,0 +1,58 @@
+{% extends './partials/layout.html' %}
+
+{% block content %}
+<form action="{{ url_for('main.home') }}" method="POST">
+
+    <h1 class="mt-5 mb-2">Your Pokemon Collection:</h1>
+    {% for pokemon in pokemons if pokemon['user_id'] == current['id'] %}
+    {% if userid != current['user.id'] %}
+    <p>Looks like you have no Pokemon. Start collecting now!</p>
+
+    {% else %}
+    <div class="mb-2">
+        <div class="card">
+            <div class="card-header">
+                <b>{{ pokemon['name'] }}</b>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{ pokemon['name'] }}: {{ pokemon['description'] }}</p>
+                <p class="card-text">Type: {{ pokemon['type'] }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+
+    <h2 class="mt-5">Capture more Pokemon now!</h2>
+    {% if pokemons == None %}
+    <p>Looks like there's no Pokemon available. Please considering gifting one!</p>
+
+    {% else %}
+    {% for pokemon in pokemons if pokemon['user_id'] == None %}
+    <p class="mt-2">Current Pokemon for Capture:</p>
+    <div class="card">
+        <div class="card-header">
+            <b>{{ pokemon['name'].title() }}</b>
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ pokemon['name'].title() }}: {{ pokemon['description'].title() }}</p>
+            <p class="card-text">Type: {{ pokemon['type'].title() }}</p>
+        </div>
+    </div>
+
+    {% else %}
+    <p>Looks like there's no Pokemon available. Please considering gifting one!</p>
+    {% endfor %}
+    {% endif %}
+
+    <div class="form-group mt-3">
+        <fieldset id="capture-field">
+            <h3>{{ form.capture.label }}</h3>
+            {{ form.capture(class="form-control", placeholder = "Enter Pokemon Name") }}
+        </fieldset>
+    </div>
+    <div class="form-group mb-5">
+        {{ form.submit_button(class="btn btn-dark btn-block") }}
+    </div>
+</form>
+{% endblock content %}

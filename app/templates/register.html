@@ -1,0 +1,66 @@
+{% extends './partials/layout.html' %}
+
+{% block content %}
+<form action="{{ url_for('auth.register') }}" method="POST">
+    {{ form.hidden_tag() }}
+    <div class="container-fluid d-flex flex-column">
+        <div class="row">
+
+            <div class="col">
+                <h2>Register a New Trainer</h2>
+                <div class="form-group">
+                    <fieldset id="email-field">
+                        {{ form.email.label }}
+                        {{ form.email(class="form-control", placeholder = "Enter your Email here") }}
+                    </fieldset>
+
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <fieldset id="username-field">
+                        {{ form.username.label }}
+                        {{ form.username(class="form-control", placeholder = "Enter your Username") }}
+                    </fieldset>
+
+                </div>
+                <div class="form-group">
+                    <fieldset id="first_name-field">
+                        {{ form.first_name.label }}
+                        {{ form.first_name(class="form-control", placeholder = "Enter your First Name") }}
+                    </fieldset>
+
+                </div>
+                <div class="form-group">
+                    <fieldset id="last_name-field">
+                        {{ form.last_name.label }}
+                        {{ form.last_name(class="form-control", placeholder = "Enter your Last Name") }}
+                    </fieldset>
+
+                </div>
+                <div class="form-group">
+                    <fieldset id="password-field">
+                        {{ form.password.label }}
+                        {{ form.password(class="form-control", placeholder = "Enter your Password") }}
+                    </fieldset>
+
+                </div>
+                <div class="form-group">
+
+                    <fieldset id="confirm_password-field">
+                        {{ form.confirm_password.label }}
+                        {{ form.confirm_password(class="form-control", placeholder = "Confirm your Password") }}
+                    </fieldset>
+
+                </div>
+                <p><small>Already have an account? <a href="{{ url_for('auth.login') }}">Login here.</a></small></p>
+                <div class="form-group">
+                    {{ form.submit_button(class = "btn btn-dark btn-block") }}
+                </div>
+            </div>
+
+            <div class="col">
+                <image src="{{ url_for('static',filename ='ballmaster.png') }}" class="img-fluid" alt="Responsive image">
+            </div>
+    </div>
+</form>
+{% endblock content %}
